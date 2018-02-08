@@ -1,0 +1,17 @@
+{
+    "name": "root/lesson-3-database.loc",
+    "type": "project",
+    "authors": [
+        {
+            "name": "SergeyK",
+            "email": "skravua@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4" : {
+            "App\\" : "app/"
+        }
+    }
+}
