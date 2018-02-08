@@ -1,18 +1,11 @@
 <?php
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WALL</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+require_once 'templates/header.php';
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+$topics = \App\Topic::find();
+
+?>
+
 
 <div class="container">
     <div class="row">
@@ -23,17 +16,21 @@
                 </div>
                 <div class="panel-body">
 
-                    <div class="row_easy">
-                        {topic 1}
-                    </div>
+                    <?php
 
-                    <div class="row_hard">
-                        {topic 2}
-                    </div>
+                    foreach ($topics as $key => $topic){
 
-                    <div class="row_easy">
-                        {topic 3}
-                    </div>
+                        ?>
+
+                        <div class="<?= $key % 2 == 0 ? "row_easy" : "row_hard" ?>">
+                            <a href="/topic.php?id=<?= $topic['id'] ?>"><?= $topic['name'] ?></a>
+
+                        </div>
+
+                        <?php
+                    }
+
+                    ?>
 
                     <div class="row_form">
                         <form method="post" class="form-group" action="/">
@@ -53,6 +50,8 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+
+<?php
+
+require_once 'templates/footer.php';
 

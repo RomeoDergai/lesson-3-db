@@ -1,44 +1,38 @@
 <?php
+require_once 'templates/header.php';
+
+$topicID = $_GET['id'];
+
+$topic = \App\Topic::findOne("`id` = $topicID");
+
+$messages = \App\Message::find("`topic_id` = $topicID");
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WALL</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    Topic : {name}
+                    Topic : <?= $topic['name'] ?>
                 </div>
                 <div class="panel-body">
 
-                    <div class="row_easy">
-                        {message 1}
-                    </div>
+                    <?php
+                    foreach ($messages as $key => $message){
 
-                    <div class="row_hard">
-                        {message 2}
-                    </div>
+                        ?>
 
-                    <div class="row_easy">
-                        {message 3}
-                    </div>
+                        <div class="<?= $key % 2 == 0 ? "row_easy" : "row_hard" ?>">
+                            <?= $message['text'] ?>
 
-                    <div class="row_hard">
-                        {message 4}
-                    </div>
+                        </div>
+
+                        <?php
+                    }
 
                     ?>
+
                     <div class="row_form">
                         <form method="post" class="form-group" action="/">
                             <div class="form-group">
@@ -58,5 +52,6 @@
     </div>
 </div>
 
-</body>
-</html>
+<?php
+
+require_once 'templates/footer.php';
